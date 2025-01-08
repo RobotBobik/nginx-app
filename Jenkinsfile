@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'LocalServer' }
+    agent { label 'мастер' }
     stages {
         stage('Checkout') {
             steps {
