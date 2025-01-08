@@ -25,7 +25,7 @@ pipeline {
         stage('Run New Container') {
             steps {
                 // Запускаємо новий контейнер
-                sh 'docker run -d --name nginx-app-container -p 8080:80 nginx-app:latest'
+                sh 'docker run -d --name nginx-app-container -p 8081:80 nginx-app:latest'
             }
         }
     }
