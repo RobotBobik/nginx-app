@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Клонуємо репозиторій
+                // Клонуємо репозиторій та оновлюємо останні зміни з main
                 git branch: 'main', url: 'https://github.com/RobotBobik/nginx-app.git'
+                sh 'git pull origin main'  // Переконатися, що ми отримали останні зміни
             }
         }
         stage('Build Docker Image') {
@@ -31,7 +32,7 @@ pipeline {
         stage('Run New Container') {
             steps {
                 // Запускаємо новий контейнер
-                sh 'docker run -d --name nginx-app-container -p 8081:80 nginx-app:latest'
+                sh 'docker run -d --name nginx-app-container -p 8080:80 nginx-app:latest'
             }
         }
     }
