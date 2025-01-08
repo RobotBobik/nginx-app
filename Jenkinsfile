@@ -22,6 +22,12 @@ pipeline {
                 '''
             }
         }
+        stage('Wait for Container Shutdown') {
+            steps {
+                // Чекаємо декілька секунд, щоб переконатися, що старий контейнер зупинений
+                sleep time: 10, unit: 'SECONDS'
+            }
+        }
         stage('Run New Container') {
             steps {
                 // Запускаємо новий контейнер
