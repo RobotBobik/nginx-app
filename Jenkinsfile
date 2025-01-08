@@ -14,18 +14,18 @@ pipeline {
                 sh 'docker build -t nginx-app:latest .'
             }
         }
-        stage('Stop and Remove Old Container') {
+        stage('Stop and Remove All Containers') {
             steps {
-                // Зупиняємо та видаляємо старий контейнер, якщо він існує
+                // Зупиняємо всі контейнери та видаляємо їх
                 sh '''
-                docker ps -q --filter "name=nginx-app-container" | xargs -r docker stop
-                docker ps -aq --filter "name=nginx-app-container" | xargs -r docker rm
+                docker stop $(docker ps -a -q) || true
+                docker rm $(docker ps -aq) || true
                 '''
             }
         }
-        stage('Wait for Container Shutdown') {
+        stage('Wait for Containers Shutdown') {
             steps {
-                // Чекаємо декілька секунд, щоб переконатися, що старий контейнер зупинений
+                // Чекаємо декілька секунд, щоб переконатися, що всі контейнери зупинені
                 sleep time: 10, unit: 'SECONDS'
             }
         }
