@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Stop and Remove All Containers') {
             steps {
-                // Зупиняємо всі контейнери та видал
+                // Зупиняємо всі контейнери та
                 sh '''
                 docker stop $(docker ps -a -q) || true
                 docker rm $(docker ps -aq) || true
