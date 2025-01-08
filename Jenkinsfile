@@ -1,11 +1,6 @@
 pipeline {
-    agent any
+    agent { label 'LocalServer' }
     stages {
-        stage('Check Agent') {
-        steps {
-                sh 'hostname'  // Виводить ім'я хоста, на якому виконується pipeline
-            }
-        }   
         stage('Checkout') {
             steps {
                 // Клонуємо репозиторій та оновлюємо останні зміни з main
